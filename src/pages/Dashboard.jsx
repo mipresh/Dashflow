@@ -7,6 +7,7 @@ import UsersBarChart from "../components/UsersBarChart";
 import OrdersPieChart from "../components/OrdersPieChart";
 import ActivityTable from "../components/ActivityTable";
 import TopUsers from "../components/TopUsers";
+import TaskManager from "../components/TaskManager";
 
 export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,6 +19,39 @@ export default function Dashboard() {
   const [revenueData, setRevenueData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
   const [usersData, setUsersData] = useState([]);
+
+  const [columns, setColumns] = useState(() => {
+  try {
+    const saved = localStorage.getItem("taskColumns");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          todo: {
+            name: "To Do",
+            items: [
+              { id: "1", content: "Design homepage" },
+              { id: "2", content: "Set up dashboard" },
+            ],
+          },
+          inprogress: {
+            name: "In Progress",
+            items: [{ id: "3", content: "Build Navbar" }],
+          },
+          done: {
+            name: "Done",
+            items: [{ id: "4", content: "Setup React app" }],
+          },
+        };
+  } catch (error) {
+    console.error("LocalStorage error:", error);
+    return {
+      todo: { name: "To Do", items: [] },
+      inprogress: { name: "In Progress", items: [] },
+      done: { name: "Done", items: [] },
+    };
+  }
+});
+
 
   // Initialize static data
   useEffect(() => {
@@ -93,11 +127,22 @@ export default function Dashboard() {
               <TopUsers users={topUsers} />
             </div>
 
+{/* Task Manager */}
+<div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg shadow">
+  <h3 className="text-gray-900 dark:text-gray-100 font-bold mb-4">
+    Task Manager
+  </h3>
+
+  <TaskManager />
+</div>
+
             {/* Activity Table */}
             <ActivityTable activities={filteredActivities} />
           </main>
         </div>
       </div>
     </div>
+
+    
   );
 }
