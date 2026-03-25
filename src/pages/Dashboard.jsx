@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [revenueData, setRevenueData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
   const [usersData, setUsersData] = useState([]);
-
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [columns, setColumns] = useState(() => {
   try {
     const saved = localStorage.getItem("taskColumns");
@@ -103,15 +103,19 @@ export default function Dashboard() {
   return (
     <div className={darkMode ? "dark" : ""}>
       <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-        <Sidebar />
+       <Sidebar 
+  mobileMenuOpen={mobileMenuOpen} 
+  setMobileMenuOpen={setMobileMenuOpen} 
+/>
 
         <div className="flex-1 flex flex-col overflow-y-auto">
-          <Navbar
-            toggleDarkMode={() => setDarkMode(!darkMode)}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-          />
-
+       <Navbar
+  toggleDarkMode={() => setDarkMode(!darkMode)}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+  setMobileMenuOpen={setMobileMenuOpen}
+/>
+ 
           <main className="p-6 space-y-6">
             {/* Stats Cards */}
             <StatsCards stats={stats} />
