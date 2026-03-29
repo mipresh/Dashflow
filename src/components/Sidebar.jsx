@@ -1,7 +1,14 @@
 import { FiHome, FiBarChart2, FiUsers, FiSettings } from "react-icons/fi";
-
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 export default function Sidebar({ mobileMenuOpen, setMobileMenuOpen }) {
+
+const handleLogout = () => {
+  localStorage.removeItem("auth");
+  window.location.href = "/login";
+};
   return (
+    
     <>
       {/* Sidebar */}
       <aside
@@ -14,19 +21,44 @@ export default function Sidebar({ mobileMenuOpen, setMobileMenuOpen }) {
         </h2>
 
         <ul className="space-y-4">
-          <li onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2 cursor-pointer">
-            <FiHome /> <span>Dashboard</span>
-          </li>
-          <li onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2 cursor-pointer">
-            <FiBarChart2 /> <span>Analytics</span>
-          </li>
-          <li onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2 cursor-pointer">
-            <FiUsers /> <span>Users</span>
-          </li>
-          <li onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2 cursor-pointer">
-            <FiSettings /> <span>Settings</span>
-          </li>
-        </ul>
+  <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+    <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-500">
+      <FiHome /> <span>Dashboard</span>
+    </li>
+  </Link>
+
+  <Link to="/analytics" onClick={() => setMobileMenuOpen(false)}>
+    <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-500">
+      <FiBarChart2 /> <span>Analytics</span>
+    </li>
+  </Link>
+
+  <Link to="/users" onClick={() => setMobileMenuOpen(false)}>
+    <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-500">
+      <FiUsers /> <span>Users</span>
+    </li>
+  </Link>
+
+  <Link to="/settings" onClick={() => setMobileMenuOpen(false)}>
+    <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-500">
+      <FiSettings /> <span>Settings</span>
+    </li>
+  </Link>
+
+  <NavLink
+  to="/analytics"
+  className={({ isActive }) =>
+    `flex items-center space-x-2 cursor-pointer ${
+      isActive ? "text-blue-500 font-bold" : ""
+    }`
+  }
+>
+  <FiBarChart2 /> <span>Analytics</span>
+</NavLink>
+<button onClick={handleLogout}>
+  Logout
+</button>
+</ul>
       </aside>
 
       {/* Overlay */}
@@ -34,8 +66,11 @@ export default function Sidebar({ mobileMenuOpen, setMobileMenuOpen }) {
         <div
           className="fixed inset-0 bg-black/50 z-30 sm:hidden"
           onClick={() => setMobileMenuOpen(false)}
+          
         />
-      )}
+     
+     )}
+     
     </>
   );
 }

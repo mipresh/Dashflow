@@ -1,4 +1,10 @@
-// src/pages/Analytics.jsx
+import Layout from "../components/Layout";
+
 export default function Analytics() {
-  return <h1 className="text-2xl">Analytics Page</h1>;
+  return (
+    <Layout>
+      <h1 className="text-2xl font-bold">Analytics</h1>
+      <p>Updating Analytics..</p>
+    </Layout>
+  );
 }

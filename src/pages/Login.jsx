@@ -1,7 +1,16 @@
 // src/pages/Login.jsx
 import { useState } from "react";
 import { login, register, forgotPassword } from "../utils/auth";
+import { useNavigate } from "react-router-dom";
 
+const navigate = useNavigate();
+
+const handleLogin = () => {
+  // Fake login (you can replace with real auth later)
+  localStorage.setItem("auth", "true");
+
+  navigate("/dashboard");
+};
 export default function Login({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -98,6 +107,7 @@ export default function Login({ onLoginSuccess }) {
         <p className="text-blue-500 text-sm cursor-pointer" onClick={() => setMode("login")}>
           Back to Login
         </p>
+        
       )}
     </div>
   );
