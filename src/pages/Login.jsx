@@ -1,17 +1,10 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { login, register, forgotPassword } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
-const handleLogin = () => {
-  // Fake login (you can replace with real auth later)
-  localStorage.setItem("auth", "true");
-
-  navigate("/dashboard");
-};
 export default function Login({ onLoginSuccess }) {
+  const navigate = useNavigate(); // <-- move useNavigate here inside the component
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState("login"); // login, register, forgot
@@ -26,21 +19,25 @@ export default function Login({ onLoginSuccess }) {
       if (result.success) {
         setMessage("Login successful!");
         if (onLoginSuccess) onLoginSuccess(); // notify parent dashboard
+        navigate("/dashboard"); // <-- navigate here after login
       }
     } else if (mode === "register") {
       result = register({ email, password });
+      if (result.success) {
+        setMessage("Registration successful!");
+        setMode("login"); // switch to login after successful registration
+      }
     } else if (mode === "forgot") {
       result = forgotPassword(email, newPassword);
     }
 
-    if (result.success) {
+    if (result && result.success) {
       setMessage("Success!");
       // clear input fields after success
       setEmail("");
       setPassword("");
       setNewPassword("");
-      if (mode === "register") setMode("login"); // redirect to login after registration
-    } else {
+    } else if (result && !result.success) {
       setMessage(result.message);
     }
   };
@@ -48,7 +45,11 @@ export default function Login({ onLoginSuccess }) {
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow bg-white dark:bg-gray-800">
       <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-        {mode === "login" ? "Login" : mode === "register" ? "Register" : "Reset Password"}
+        {mode === "login"
+          ? "Login"
+          : mode === "register"
+          ? "Register"
+          : "Reset Password"}
       </h2>
 
       {message && <p className="text-red-500 mb-2">{message}</p>}
@@ -107,7 +108,6 @@ export default function Login({ onLoginSuccess }) {
         <p className="text-blue-500 text-sm cursor-pointer" onClick={() => setMode("login")}>
           Back to Login
         </p>
-        
       )}
     </div>
   );
