@@ -9,7 +9,7 @@ export default function Layout({ children }) {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-      <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
         
         {/* Sidebar */}
         <Sidebar 
