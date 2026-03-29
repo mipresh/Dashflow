@@ -55,9 +55,7 @@ const handleLogout = () => {
 >
   <FiBarChart2 /> <span>Analytics</span>
 </NavLink>
-<button onClick={handleLogout}>
-  Logout
-</button>
+
 </ul>
       </aside>
 
