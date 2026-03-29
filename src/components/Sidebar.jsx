@@ -1,6 +1,5 @@
 import { FiHome, FiBarChart2, FiUsers, FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 export default function Sidebar({ mobileMenuOpen, setMobileMenuOpen }) {
 
 const handleLogout = () => {
@@ -45,16 +44,7 @@ const handleLogout = () => {
     </li>
   </Link>
 
-  <NavLink
-  to="/analytics"
-  className={({ isActive }) =>
-    `flex items-center space-x-2 cursor-pointer ${
-      isActive ? "text-blue-500 font-bold" : ""
-    }`
-  }
->
-  <FiBarChart2 /> <span>Analytics</span>
-</NavLink>
+
 
 </ul>
       </aside>
