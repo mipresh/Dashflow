@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login, register, forgotPassword } from "../utils/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 export default function Login({ onLoginSuccess }) {
   const navigate = useNavigate(); // <-- move useNavigate here inside the component
