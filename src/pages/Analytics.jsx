@@ -34,12 +34,12 @@ export default function Analytics() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl shadow p-6 border border-gray-100 h-64">
             <h3 className="font-semibold mb-2">User Growth</h3>
-            <p className="text-gray-400 text-sm">Chart will go here</p>
+            <p className="text-gray-400 text-sm">Charts</p>
           </div>
 
           <div className="bg-white rounded-2xl shadow p-6 border border-gray-100 h-64">
             <h3 className="font-semibold mb-2">Revenue Overview</h3>
-            <p className="text-gray-400 text-sm">Chart will go here</p>
+            <p className="text-gray-400 text-sm">Charts</p>
           </div>
         </div>
 
